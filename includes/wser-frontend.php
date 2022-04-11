@@ -44,6 +44,9 @@ class Woo_Silver_Exchange_Rate_Frontend{
 				$rates = $exchangeRates->rates;
 				$silver_price = $rates->XAG;
 
+				if(get_woocommerce_currency()=="USD")
+					$silver_price = 1/$silver_price;
+				
 				if(!($silver_price > 0)){
 					foreach ($wpdb->get_results("SELECT price FROM $table_name WHERE name='silver'") as $retrieved_data){
 						$priceFromDB = $retrieved_data->price;
